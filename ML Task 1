@@ -1,0 +1,49 @@
+##taxi fare predictions
+
+import pandas as pd
+#file path
+taxi_fare_path = "C:\\MMB\\EDU\\NITT\\Clubs,Teams\\DataByte\\Fare_ pred\\Fare_ pred\\test_fare for code.csv"
+#laoding file as a DataFrame
+taxi_fare_stat = pd.read_csv(taxi_fare_path)
+print(taxi_fare_stat.describe())
+
+#selecting feature to predcict
+y = taxi_fare_stat.total_fare
+
+#selecting features used to predict
+taxi_feature_names = ['trip_duration', 'distance_traveled', 'num_of_passengers', 'fare', 'tip', 'miscellaneous_fees']
+
+#separating required data
+X = taxi_fare_stat[taxi_feature_names]
+
+from sklearn.tree import DecisionTreeRegressor
+taxi_model = DecisionTreeRegressor(random_state = 1)
+
+taxi_model.fit(X,y)
+
+ta_predictions = taxi_model.predict(X)
+print(ta_predictions)
+
+##train fare
+
+#file path
+train_fare_path = "C:\\MMB\\EDU\\NITT\\Clubs,Teams\\DataByte\\Fare_ pred\\Fare_ pred\\Train_fare for code.csv"
+#laoding file as a DataFrame
+train_fare_stat = pd.read_csv(train_fare_path)
+print(train_fare_stat.describe())
+
+#selecting feature to predict
+z = train_fare_stat.total_fare
+
+#selecting features used to predict
+train_feature_names = ['trip_duration', 'distance_traveled', 'distance_traveled.1', 'num_of_passengers', 'fare', 'tip', 'miscellaneous_fees']
+
+#separating required data
+W = train_fare_stat[train_feature_names]
+
+train_model = DecisionTreeRegressor(random_state = 2)
+
+train_model.fit(W,z)
+
+tr_predictions = train_model.predict(W)
+print(tr_predictions)
